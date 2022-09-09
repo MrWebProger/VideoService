@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
         libpq-dev \
         zip \
         unzip \
+        ffmpeg \
         librabbitmq-dev;
 
 RUN docker-php-ext-install pdo_mysql gd intl zip sockets
