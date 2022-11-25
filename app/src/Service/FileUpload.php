@@ -29,8 +29,7 @@ class FileUpload
     public function upload(UploadedFile $uploadedFile): File
     {
         $file = $this->getPreparedFile($uploadedFile);
-        $uploadPath = $this->getUploadPath();
-        $uploadedFile->move($uploadPath, $file->getName());
+        $uploadedFile->move($this->uploadDirectory, $file->getName());
 
         $entityManager = $this->doctrine->getManager();
 
@@ -58,26 +57,5 @@ class FileUpload
     private function getRandomNameForNewFile(UploadedFile $uploadedFile): string
     {
         return uniqid() . RandomString::get(10) . '.' . $uploadedFile->getClientOriginalExtension();
-    }
-
-    private function getUploadPath(): string
-    {
-        $currentDate = (new \DateTimeImmutable())->format('Y-m-d');
-        $uploadPath = "{$this->uploadDirectory}/{$currentDate}";
-
-        $this->createUploadSubDirIfNotExists($uploadPath);
-
-        return $uploadPath;
-    }
-
-    private function createUploadSubDirIfNotExists(string $uploadPath): void
-    {
-        if (file_exists($uploadPath)) {
-            return;
-        }
-
-        if (!mkdir($uploadPath)) {
-            throw new \RuntimeException('Не удалось создать поддиректорию для загрузки файлов');
-        }
     }
 }
