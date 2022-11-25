@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
         ffmpeg \
         librabbitmq-dev;
 
-RUN docker-php-ext-install pdo_mysql gd intl zip sockets
+RUN docker-php-ext-install pdo pdo_mysql gd intl zip sockets
 
 RUN pecl install amqp && docker-php-ext-enable amqp
 
