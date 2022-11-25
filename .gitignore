@@ -1,3 +1,6 @@
 /.idea
 /app/public/upload/*
 /database
+/.env.local
+/.env.local.php
+/.env.*.local
