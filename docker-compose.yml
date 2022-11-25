@@ -9,6 +9,7 @@ services:
       - ./configuration/php/php.ini:/usr/local/etc/php/php.ini
     env_file:
       - .env
+      - .env.local
   nginx:
     image: nginx:stable
     working_dir: /app
